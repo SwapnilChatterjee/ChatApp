@@ -10,7 +10,7 @@ var io = require('socket.io')(server, {
 });
 app.use(express.static('public'));
 app.get('/' , (req, res) =>{
-    res.sendFile('public/index.html');
+    res.sendFile('./public/index.html');
 })
 
 const users = {};
