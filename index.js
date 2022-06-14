@@ -13,6 +13,10 @@ app.get('/' , (req, res) =>{
     res.sendFile('./public/index.html');
 })
 
+app.get('/removed' , (req, res) =>{
+    res.sendFile(__dirname +'/public/removed.html');
+})
+
 const users = {};
 
 
