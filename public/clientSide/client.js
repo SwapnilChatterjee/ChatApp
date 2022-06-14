@@ -4,6 +4,7 @@ const socket = io();
 const form = document.getElementById('sendcontainer');
 const messageInput = document.getElementById('messageInp')
 const messageContainer = document.querySelector('.container')
+const form1 = document.getElementById('closeChat');
 
 var sound = new Audio('../music.mp3')
 
@@ -18,6 +19,15 @@ const append = (message, position) =>{
     messageContainer.append(messageElement);
 
 }
+
+form1.addEventListener('submit' , e=>{
+    e.preventDefault();
+    if(Username === "Admin" || Username === "admin"){
+        console.log("Admin closed the chat")
+        socket.emit('closeChat' , Username);
+    }
+    
+})
 
 form.addEventListener('submit' , e=>{
     e.preventDefault();
@@ -38,6 +48,9 @@ const showToast = (data , message) =>{
     
 }
 
+const reload = () =>{
+    location.replace("/removed");
+}
 
 
 socket.on('left' , data => {
@@ -60,5 +73,9 @@ socket.on('userJoined', Username =>{
 
 socket.on('receive', data =>{
     append(`${data.name} : ${data.message}` , 'left');
+})
+
+socket.on('chatClosed' , data =>{
+    reload();
 })
 

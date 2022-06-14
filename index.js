@@ -34,4 +34,10 @@ io.on('connection' , socket => {
     socket.on('abandoned' , message =>{
         socket.broadcast.emit('left' ,  users[socket.id]);
     })
+    socket.on('closeChat' , data=>{
+        
+        socket.broadcast.emit('chatClosed' , data);
+        
+        
+    })
 })
